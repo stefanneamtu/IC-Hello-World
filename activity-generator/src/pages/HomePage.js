@@ -1,3 +1,5 @@
+import Button from 'react-bootstrap/Button';
+
 export function HomePage() {
     return(
         <div>
