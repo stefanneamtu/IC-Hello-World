@@ -3,7 +3,7 @@ const readline = require('readline');
 const {google} = require('googleapis');
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/calendar'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
@@ -13,7 +13,8 @@ const TOKEN_PATH = 'token.json';
 fs.readFile('credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   // Authorize a client with credentials, then call the Google Calendar API.
-  authorize(JSON.parse(content), listEvents);
+  //authorize(JSON.parse(content), listEvents);
+  authorize(JSON.parse(content), addEvent);
 });
 
 /**
@@ -90,5 +91,45 @@ function listEvents(auth) {
     } else {
       console.log('No upcoming events found.');
     }
+  });
+}
+
+//adds an event to my calendar
+function addEvent(auth) {
+    const calendar = google.calendar({version: 'v3', auth});
+    console.log("Should hopefully add an event");
+// Refer to the Node.js quickstart on how to setup the environment:
+// https://developers.google.com/calendar/quickstart/node
+// Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
+// stored credentials.
+
+var event = {
+    'summary': 'Test event',
+    'description': 'Can I add events to my calendar?',
+    'start': {
+      'dateTime': '2021-03-27T22:00:00+00:00',
+    },
+    'end': {
+      'dateTime': '2021-03-27T23:00:00+00:00',
+    },
+    'reminders': {
+      'useDefault': false,
+      'overrides': [
+        {'method': 'email', 'minutes': 24 * 60},
+        {'method': 'popup', 'minutes': 10},
+      ],
+    },
+  };
+  
+  calendar.events.insert({
+    auth: auth,
+    calendarId: 'primary',
+    resource: event,
+  }, function(err, event) {
+    if (err) {
+      console.log('There was an error contacting the Calendar service: ' + err);
+      return;
+    }
+    console.log('Event created: %s', event.htmlLink);
   });
 }
