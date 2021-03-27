@@ -9,10 +9,10 @@ function NavBar() {
     <div>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/"> <p2>Home</p2></Link>
         </li>
         <li>
-          <Link to="/activity">Activity</Link>
+          <Link to="/activity"> <p2>Random activity generator</p2></Link>
         </li>
       </ul>
     </div>
