@@ -1,7 +1,7 @@
 export function HomePage() {
-    return(
+    return(<div>
         <div>
-            <h1>Activity Generator</h1>
+            <p>Sign in with your Google account (to get your calendar)</p>
         </div>
-    )
+    </div>)
 }
