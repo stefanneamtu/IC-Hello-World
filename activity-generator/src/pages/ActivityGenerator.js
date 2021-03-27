@@ -17,9 +17,9 @@ export function ActivityGenerator(){
         randActivity = randomActivity();
 
         const element = (
-            <div>
+            <div class="wrapper">
             <h1>activity generator</h1>
-            <button onClick={showWheel}>Pick me an activity</button>
+            <button class="button" onClick={showWheel}>Pick me an activity</button>
             <p>{randActivity}</p>
             <img src={"imgUrl"} alt = "loading..." />        
             
