@@ -1,6 +1,6 @@
 import './ActivityGenerator.css';
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
-import { google } from 'googleapis';
+//import { google } from 'googleapis';
 import Button from 'react-bootstrap/Button';
 import {createApi} from 'unsplash-js'
 import React, {useState} from 'react'
@@ -34,7 +34,7 @@ export function ActivityGenerator(){
             <h1>activity generator</h1>
             <button class="button" onClick={showWheel}>Pick me an activity</button>
             <p>{randActivity}</p>
-            <button class="button" onClick={addEvent}>Add to my calendar</button>
+            <button class="button">Add to my calendar</button>
             <img src={"imgUrl"} alt = "loading..." />        
             
             </div>
@@ -67,7 +67,7 @@ export function ActivityGenerator(){
         
     }
 
-    function addEvent() {
+    /* function addEvent() {
         //console.log(typeof google);
         //const fs = require('fs');
         //var credentials;
@@ -129,7 +129,7 @@ export function ActivityGenerator(){
             }
             console.log('Event created: %s', event.htmlLink);
         });
-    }
+    } */
 
     return(
         /*<div>
@@ -147,7 +147,7 @@ export function ActivityGenerator(){
             <h1> Random activity generator</h1>
             <button class="button" onClick={showWheel}>Pick me an activity</button>
             <p>{randActivity}</p>
-            <button class="button" onClick={addEvent}>Add to my calendar</button>
+            <button class="button">Add to my calendar</button>
             <img src={"imgUrl"} alt = "loading..." />        
         
         </div>
