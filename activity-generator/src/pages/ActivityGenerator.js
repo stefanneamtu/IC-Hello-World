@@ -1,12 +1,14 @@
 import './ActivityGenerator.css';
+import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
+import { google } from 'googleapis';
+import Button from 'react-bootstrap/Button';
 import {createApi} from 'unsplash-js'
 import React, {useState} from 'react'
-import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 import ReactDOM from 'react-dom';
-import { google } from 'googleapis';
 
-export function ActivityGenerator() {
 
+export function ActivityGenerator(){
+  
     var activities = ["Zoom call", "Walk in park", "Quiz"];
     var randActivity = randomActivity();
     const [imgUrl, setUrl] = useState(null);

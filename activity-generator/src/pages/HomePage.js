@@ -15,8 +15,6 @@ function test() {
   .then(json => console.log(json));
 }
 
-
-
 export class HomePage extends Component {
 
   responseGoogle = (response) => {
