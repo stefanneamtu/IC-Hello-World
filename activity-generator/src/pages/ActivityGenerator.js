@@ -1,5 +1,6 @@
 import './ActivityGenerator.css';
 import Button from 'react-bootstrap/Button';
+//import { google } from 'googleapis';
 import {createApi} from 'unsplash-js'
 import React, {useState} from 'react'
 import ReactDOM from 'react-dom';
@@ -21,7 +22,9 @@ export function ActivityGenerator(){
             <h1>activity generator</h1>
             <button class="button" onClick={showWheel}>Pick me an activity</button>
             <p>{randActivity}</p>
-            <img src={"imgUrl"} alt = "loading..." />        
+            <button class="button" onClick={addEvent}>Add to my calendar</button>
+            <img src={"imgUrl"} alt = "loading..." />
+                    
             
             </div>
         )
@@ -50,6 +53,77 @@ export function ActivityGenerator(){
             // setUrl(response["results"][0]["urls"]["regular"])
         })
         
+    }
+
+    function addEvent() {
+        //console.log(typeof google);
+        //const fs = require('fs');
+        //var credentials;
+
+        //fs.readFile('credentials.json', (err, content) => {
+            //if (err) return console.log('Error loading client secret file:', err);
+             //Authorize a client with credentials, then call the Google Calendar API.
+            
+            //credentials = JSON.parse(content);
+            
+        //});
+        //const {client_secret, client_id, redirect_uris} = credentials.installed;
+
+        /*
+        const auth = new google.auth.OAuth2(
+            process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI);
+
+        
+
+        //adds an event to my calendar
+
+        //const calendar = google.calendar({version: 'v3', auth});
+        
+
+        // Refer to the Node.js quickstart on how to setup the environment:
+        // https://developers.google.com/calendar/quickstart/node
+        // Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
+        // stored credentials.
+
+        var start = new Date();
+        
+
+        const MILLIS_PER_HOUR = 3600000;
+        
+        var end = new Date(start.getTime() + MILLIS_PER_HOUR);
+
+        /*
+
+        var event = {
+            'summary': randActivity,
+            'start': {
+            'dateTime': start.toISOString(),
+            },
+            'end': {
+            'dateTime': end.toISOString(),
+            },
+            'reminders': {
+            'useDefault': false,
+            'overrides': [
+                {'method': 'email', 'minutes': 24 * 60},
+                {'method': 'popup', 'minutes': 10},
+            ],
+            },
+        };
+
+        /*
+        
+        calendar.events.insert({
+            auth: auth,
+            calendarId: 'primary',
+            resource: event,
+        }, function(err, event) {
+            if (err) {
+            console.log('There was an error contacting the Calendar service: ' + err);
+            return;
+            }
+            console.log('Event created: %s', event.htmlLink);
+        }); */
     }
 
     return(
