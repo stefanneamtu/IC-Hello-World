@@ -2,6 +2,7 @@ import './ActivityGenerator.css';
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 import { google } from 'googleapis';
 import Button from 'react-bootstrap/Button';
+//import { google } from 'googleapis';
 import {createApi} from 'unsplash-js'
 import React, {useState} from 'react'
 import ReactDOM from 'react-dom';
@@ -35,8 +36,7 @@ export function ActivityGenerator(){
             <button class="button" onClick={showWheel}>Pick me an activity</button>
             <p>{randActivity}</p>
             <button class="button" onClick={addEvent}>Add to my calendar</button>
-            <img src={"imgUrl"} alt = "loading..." />        
-            
+            <img src={"imgUrl"} alt = "loading..." />  
             </div>
             //</div>
         )
@@ -80,14 +80,16 @@ export function ActivityGenerator(){
             
         //});
         //const {client_secret, client_id, redirect_uris} = credentials.installed;
+
+        /*
         const auth = new google.auth.OAuth2(
             process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI);
 
         
 
         //adds an event to my calendar
-        
-        const calendar = google.calendar({version: 'v3', auth});
+
+        //const calendar = google.calendar({version: 'v3', auth});
         
         // Refer to the Node.js quickstart on how to setup the environment:
         // https://developers.google.com/calendar/quickstart/node
@@ -101,6 +103,7 @@ export function ActivityGenerator(){
         
         var end = new Date(start.getTime() + MILLIS_PER_HOUR);
 
+        /*
         var event = {
             'summary': randActivity,
             'start': {
@@ -117,6 +120,8 @@ export function ActivityGenerator(){
             ],
             },
         };
+
+        /*
         
         calendar.events.insert({
             auth: auth,
@@ -128,7 +133,7 @@ export function ActivityGenerator(){
             return;
             }
             console.log('Event created: %s', event.htmlLink);
-        });
+        }); */
     }
 
     return(
