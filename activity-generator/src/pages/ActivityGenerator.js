@@ -3,6 +3,7 @@ import {createApi} from 'unsplash-js'
 import React, {useState} from 'react'
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 import ReactDOM from 'react-dom';
+import { google } from 'googleapis';
 
 export function ActivityGenerator() {
 
@@ -53,7 +54,7 @@ export function ActivityGenerator() {
 
     function getImage(queryString) {
         const unsplash = createApi({
-            accessKey: 'TXmsxWk4HiObYTj_WKQ-2jnB3wRe28pqV2MWrMDrdeY'
+            accessKey: process.env.IMAGE_ACCESS_KEY,
         })
         var response = unsplash.search.getPhotos({
             query: queryString
@@ -65,8 +66,7 @@ export function ActivityGenerator() {
     }
 
     function addEvent() {
-        const {google} = require('googleapis');
-        console.log(typeof google);
+        //console.log(typeof google);
         //const fs = require('fs');
         //var credentials;
 
@@ -92,14 +92,20 @@ export function ActivityGenerator() {
         // Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
         // stored credentials.
 
+        var start = new Date();
+        
+
+        const MILLIS_PER_HOUR = 3600000;
+        
+        var end = new Date(start.getTime() + MILLIS_PER_HOUR);
+
         var event = {
-            'summary': 'Test event',
-            'description': 'Can I add events to my calendar?',
+            'summary': randActivity,
             'start': {
-            'dateTime': '2021-03-27T22:00:00+00:00',
+            'dateTime': start.toISOString(),
             },
             'end': {
-            'dateTime': '2021-03-27T23:00:00+00:00',
+            'dateTime': end.toISOString(),
             },
             'reminders': {
             'useDefault': false,
