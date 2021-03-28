@@ -152,8 +152,7 @@ export function ActivityGenerator(){
         </div>*/
         <div class="wrapper">
             <h1> Random activity generator</h1>
-            <button class="button" onClick={showWheel}>Pick me an activity</button>
-            <p>{randActivity}</p>      
+            <button class="button" onClick={showWheel}>Pick me an activity</button>    
         
         </div>
         //</div>
