@@ -1,14 +1,18 @@
 import './ActivityGenerator.css';
+import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { createApi } from 'unsplash-js'
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom';
-import {contacts} from './HomePage';
-
+import { contacts } from './HomePage';
 
 export function ActivityGenerator() {
 
-  var activities = ["Zoom call", "Walk in park", "Quiz"];
+  var activities = ["Zoom call", "Walk in park", "Quiz", "Calligraphy", "Cooking", "Running", "Do some yoga",
+    "Watch a movie", "Football", "Tennis", "Basketball", "Knitting", "Pottery", "Meditation", "Photography",
+    "Play a card game", "Library", "Board Game", "Play Chess", "Cook", "Go for a bike ride", "Chat", "Call",
+    "Watch TV", "Roller Skating", "Frisbee", "Go for a walk"
+  ];
   var randActivity = randomActivity();
   var randContact = randomContact();
   const [imgUrl, setUrl] = useState(null);
@@ -17,15 +21,13 @@ export function ActivityGenerator() {
   function showWheel() {
     <img src={"https://i.pinimg.com/originals/94/cc/d5/94ccd56f2a24d1eb9486d86fcee0b3b1.gif"} alt="loading..." />
     randActivity = randomActivity();
-    randContact = randomContact();  
+    randContact = randomContact();
 
     const element = (
       <div class="wrapper">
         <h1>activity generator</h1>
         <button class="button" onClick={showWheel}>Pick me an activity</button>
-        <p>{randActivity} with {randContact}!</p>
-        <img src={"imgUrl"} lt="loading..." />
-
+        <p>{randActivity} with {randContact} !</p>
       </div>
     )
 
@@ -38,7 +40,6 @@ export function ActivityGenerator() {
     // console.log(randActivity)
 
     // console.log(queryString)
-    getImage(queryString)
     return randActivity
   }
 
@@ -48,28 +49,12 @@ export function ActivityGenerator() {
     console.log(contacts[0]);
     return randContact;
   }
-
-  function getImage(queryString) {
-    const unsplash = createApi({
-      accessKey: 'TXmsxWk4HiObYTj_WKQ-2jnB3wRe28pqV2MWrMDrdeY'
-    })
-    var response = unsplash.search.getPhotos({
-      query: queryString
-    }).then((response) => {
-      console.log(response)
-      // setUrl(response["results"][0]["urls"]["regular"])
-    })
-
-  }
-
+  
   return (
     <div class="wrapper">
       <h1> Random activity generator</h1>
       <button class="button" onClick={showWheel}>Pick me an activity</button>
-      <p>{randActivity}</p>
-      <img src={"imgUrl"} alt="loading..." />
-
-
+      <p>{randActivity} with {randContact} !</p>
     </div>
   );
 }
