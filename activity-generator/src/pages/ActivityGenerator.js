@@ -1,6 +1,5 @@
 import './ActivityGenerator.css';
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
-import { google } from 'googleapis';
 import Button from 'react-bootstrap/Button';
 //import { google } from 'googleapis';
 import {createApi} from 'unsplash-js'
@@ -10,7 +9,11 @@ import ReactDOM from 'react-dom';
 
 export function ActivityGenerator(){
   
-    var activities = ["Zoom call", "Walk in park", "Quiz"];
+    var activities = ["Zoom call", "Walk in park", "Quiz", "Calligraphy", "Cooking", "Running", "Do some yoga",
+        "Watch a movie", "Football","Tennis", "Basketball", "Knitting", "Pottery", "Meditation", "Photography",
+        "Play a card game", "Library", "Board Game", "Play Chess", "Cook", "Go for a bike ride", "Chat", "Call",
+        "Watch TV", "Roller Skating", "Frisbee", "Go for a walk"
+    ];
     var randActivity = randomActivity();
     const [imgUrl, setUrl] = useState(null);
 
@@ -35,8 +38,7 @@ export function ActivityGenerator(){
             <h1>activity generator</h1>
             <button class="button" onClick={showWheel}>Pick me an activity</button>
             <p>{randActivity}</p>
-            <button class="button" onClick={addEvent}>Add to my calendar</button>
-            <img src={"imgUrl"} alt = "loading..." />  
+            <button class="button" onClick={addEvent}>Add to my calendar</button>  
             </div>
             //</div>
         )
@@ -151,9 +153,7 @@ export function ActivityGenerator(){
         <div class="wrapper">
             <h1> Random activity generator</h1>
             <button class="button" onClick={showWheel}>Pick me an activity</button>
-            <p>{randActivity}</p>
-            <button class="button" onClick={addEvent}>Add to my calendar</button>
-            <img src={"imgUrl"} alt = "loading..." />        
+            <p>{randActivity}</p>      
         
         </div>
         //</div>
