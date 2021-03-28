@@ -1,4 +1,3 @@
-
 import GoogleLogin from 'react-google-login'
 import { Component } from 'react';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom'
@@ -31,7 +30,7 @@ export class HomePage extends Component {
     return (
       <div>
         <h1>.keepintouch</h1>
-        <h2>Affraid of moving away from your friends ?</h2>
+        <h2>Afraid of moving away from your friends?</h2>
         <p>Try our new app that allows you to live random experiences and activities with your friends. Just sign in using your Google account and we will take care of the rest</p>
         <img src={"https://i.pinimg.com/originals/94/cc/d5/94ccd56f2a24d1eb9486d86fcee0b3b1.gif"} alt="wheel" class="center"/>
         

@@ -1,4 +1,6 @@
 import './ActivityGenerator.css';
+import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
+import { google } from 'googleapis';
 import Button from 'react-bootstrap/Button';
 import {createApi} from 'unsplash-js'
 import React, {useState} from 'react'
@@ -17,13 +19,26 @@ export function ActivityGenerator(){
         randActivity = randomActivity();
 
         const element = (
+            /*<div>
+            <div>
+            <ul>
+                <li>
+                <Link to="/"> <p2>Home</p2></Link>
+                </li>
+                <li>
+                <Link to="/activity"> <p2>Random activity generator</p2></Link>
+                </li>
+            </ul>
+            </div>*/
             <div class="wrapper">
             <h1>activity generator</h1>
             <button class="button" onClick={showWheel}>Pick me an activity</button>
             <p>{randActivity}</p>
+            <button class="button" onClick={addEvent}>Add to my calendar</button>
             <img src={"imgUrl"} alt = "loading..." />        
             
             </div>
+            //</div>
         )
 
         ReactDOM.render(element, document.getElementById('root'));
@@ -41,7 +56,7 @@ export function ActivityGenerator(){
 
     function getImage(queryString) {
         const unsplash = createApi({
-            accessKey: 'TXmsxWk4HiObYTj_WKQ-2jnB3wRe28pqV2MWrMDrdeY'
+            accessKey: process.env.IMAGE_ACCESS_KEY,
         })
         var response = unsplash.search.getPhotos({
             query: queryString
@@ -52,14 +67,90 @@ export function ActivityGenerator(){
         
     }
 
+    function addEvent() {
+        //console.log(typeof google);
+        //const fs = require('fs');
+        //var credentials;
+
+        //fs.readFile('credentials.json', (err, content) => {
+            //if (err) return console.log('Error loading client secret file:', err);
+             //Authorize a client with credentials, then call the Google Calendar API.
+            
+            //credentials = JSON.parse(content);
+            
+        //});
+        //const {client_secret, client_id, redirect_uris} = credentials.installed;
+        const auth = new google.auth.OAuth2(
+            process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI);
+
+        
+
+        //adds an event to my calendar
+        
+        const calendar = google.calendar({version: 'v3', auth});
+        
+        // Refer to the Node.js quickstart on how to setup the environment:
+        // https://developers.google.com/calendar/quickstart/node
+        // Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
+        // stored credentials.
+
+        var start = new Date();
+        
+
+        const MILLIS_PER_HOUR = 3600000;
+        
+        var end = new Date(start.getTime() + MILLIS_PER_HOUR);
+
+        var event = {
+            'summary': randActivity,
+            'start': {
+            'dateTime': start.toISOString(),
+            },
+            'end': {
+            'dateTime': end.toISOString(),
+            },
+            'reminders': {
+            'useDefault': false,
+            'overrides': [
+                {'method': 'email', 'minutes': 24 * 60},
+                {'method': 'popup', 'minutes': 10},
+            ],
+            },
+        };
+        
+        calendar.events.insert({
+            auth: auth,
+            calendarId: 'primary',
+            resource: event,
+        }, function(err, event) {
+            if (err) {
+            console.log('There was an error contacting the Calendar service: ' + err);
+            return;
+            }
+            console.log('Event created: %s', event.htmlLink);
+        });
+    }
+
     return(
+        /*<div>
+        <div>
+        <ul>
+            <li>
+            <Link to="/"> <p2>Home</p2></Link>
+            </li>
+            <li>
+            <Link to="/activity"> <p2>Random activity generator</p2></Link>
+            </li>
+        </ul>
+        </div>*/
         <div class="wrapper">
             <h1> Random activity generator</h1>
             <button class="button" onClick={showWheel}>Pick me an activity</button>
             <p>{randActivity}</p>
+            <button class="button" onClick={addEvent}>Add to my calendar</button>
             <img src={"imgUrl"} alt = "loading..." />        
         
-
         </div>
+        //</div>
     );
 }
