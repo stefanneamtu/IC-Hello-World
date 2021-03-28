@@ -1,12 +1,3 @@
-<<<<<<< Updated upstream
-export function HomePage() {
-    return(<div>
-        <div>
-            <p>Sign in with your Google account (to get your calendar)</p>
-        </div>
-    </div>)
-=======
-
 import GoogleLogin from 'react-google-login'
 import { Component } from 'react';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom'
@@ -57,5 +48,4 @@ export class HomePage extends Component {
       </div>
     )
   }
->>>>>>> Stashed changes
 }

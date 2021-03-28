@@ -1,5 +1,4 @@
 import './ActivityGenerator.css';
-import Button from 'react-bootstrap/Button';
 import {createApi} from 'unsplash-js'
 import React, {useState} from 'react'
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
@@ -67,20 +66,22 @@ export function ActivityGenerator() {
 
     function addEvent() {
         const {google} = require('googleapis');
-        const fs = require('fs');
-        var credentials;
+        console.log(typeof google);
+        //const fs = require('fs');
+        //var credentials;
 
-        fs.readFile('credentials.json', (err, content) => {
-            if (err) return console.log('Error loading client secret file:', err);
-            // Authorize a client with credentials, then call the Google Calendar API.
+        //fs.readFile('credentials.json', (err, content) => {
+            //if (err) return console.log('Error loading client secret file:', err);
+             //Authorize a client with credentials, then call the Google Calendar API.
             
-            credentials = JSON.parse(content);
+            //credentials = JSON.parse(content);
             
-        });
-        console.log("line 78");
-        const {client_secret, client_id, redirect_uris} = credentials.installed;
+        //});
+        //const {client_secret, client_id, redirect_uris} = credentials.installed;
         const auth = new google.auth.OAuth2(
-        client_id, client_secret, redirect_uris[0]);
+            process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI);
+
+        
 
         //adds an event to my calendar
         
