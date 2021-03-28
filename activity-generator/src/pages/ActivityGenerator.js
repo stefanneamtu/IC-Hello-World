@@ -3,13 +3,13 @@ import Button from 'react-bootstrap/Button';
 import {createApi} from 'unsplash-js'
 import React, {useState} from 'react'
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
 
 
 export function ActivityGenerator(){
   
-    var activities = ["Zoom call", "Walk in park", "Quiz"];
+    var activities = ["Zoom call", "Walk in park", "Quiz", "Take photographs", "Yoga", "Jogging or running"];
     var randActivity = randomActivity();
-    const [imgUrl, setUrl] = useState(null);
 
 
     function showWheel(){
@@ -17,12 +17,26 @@ export function ActivityGenerator(){
         randActivity = randomActivity();
 
         const element = (
-            <div class="wrapper">
-            <h1>activity generator</h1>
-            <button class="button" onClick={showWheel}>Pick me an activity</button>
-            <p>{randActivity}</p>
-            <img src={"imgUrl"} alt = "loading..." />        
             
+            <div>
+            <BrowserRouter>
+                <div>
+                    <ul>
+                        <li>
+                            <Link to="/"> <p2>Home</p2></Link>
+                        </li>
+                        <li>
+                            <Link to="/activity"> <p2>Random activity generator</p2></Link>
+                        </li>
+                    </ul>
+                </div>
+            </BrowserRouter>
+            <div class="wrapper">
+            <h1>Random activity generator</h1>
+            <button class="button" onClick={showWheel}>Pick me an activity</button>
+            <p>{randActivity}</p>       
+            
+            </div>
             </div>
         )
 
@@ -56,8 +70,7 @@ export function ActivityGenerator(){
         <div class="wrapper">
             <h1> Random activity generator</h1>
             <button class="button" onClick={showWheel}>Pick me an activity</button>
-            <p>{randActivity}</p>
-            <img src={"imgUrl"} alt = "loading..." />        
+            <p>{randActivity}</p>    
         
 
         </div>
