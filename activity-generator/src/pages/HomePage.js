@@ -1,19 +1,25 @@
-
 import GoogleLogin from 'react-google-login'
 import { Component } from 'react';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
 import './HomePage.css';
 
 var accessToken;
 
-function test() {
+function importContacts() {
   fetch('https://www.google.com/m8/feeds/contacts/default/full', {
     headers: {
       'Authorization': 'Bearer ' + accessToken
     }
   })
-  .then(response => response.json())
-  .then(json => console.log(json));
+  .then(response => response.text())
+  .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+  .then(data => {
+    for (const contact of data.getElementsByTagName("entry")) {
+      console.log(contact.getElementsByTagName("title")[0].childNodes[0]);
+      // console.log(contact);
+    }
+  });
 }
 
 export class HomePage extends Component {
@@ -21,10 +27,6 @@ export class HomePage extends Component {
   responseGoogle = (response) => {
     console.log(response);
     accessToken = response.accessToken;
-  }
-
-  responseContacts = (response) => {
-    console.log(response);
   }
 
   render() {
@@ -43,7 +45,7 @@ export class HomePage extends Component {
           onFailure={this.responseGoogle}
           cookiePolicy={'single_host_origin'}
         />
-        <button onClick={test}>Meh</button>
+        <Button onClick={importContacts}>Import Contacts</Button>
       </div>
     )
   }
