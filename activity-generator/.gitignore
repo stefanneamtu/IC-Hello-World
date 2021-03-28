@@ -8,6 +8,10 @@
 /.pnp
 .pnp.js
 
+# api keys
+.env
+/google-apis/credentials.json
+
 # testing
 /coverage
 

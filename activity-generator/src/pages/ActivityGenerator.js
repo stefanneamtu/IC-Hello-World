@@ -1,4 +1,6 @@
 import './ActivityGenerator.css';
+import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
+import { google } from 'googleapis';
 import Button from 'react-bootstrap/Button';
 //import { google } from 'googleapis';
 import {createApi} from 'unsplash-js'
@@ -18,15 +20,25 @@ export function ActivityGenerator(){
         randActivity = randomActivity();
 
         const element = (
+            /*<div>
+            <div>
+            <ul>
+                <li>
+                <Link to="/"> <p2>Home</p2></Link>
+                </li>
+                <li>
+                <Link to="/activity"> <p2>Random activity generator</p2></Link>
+                </li>
+            </ul>
+            </div>*/
             <div class="wrapper">
             <h1>activity generator</h1>
             <button class="button" onClick={showWheel}>Pick me an activity</button>
             <p>{randActivity}</p>
             <button class="button" onClick={addEvent}>Add to my calendar</button>
-            <img src={"imgUrl"} alt = "loading..." />
-                    
-            
+            <img src={"imgUrl"} alt = "loading..." />  
             </div>
+            //</div>
         )
 
         ReactDOM.render(element, document.getElementById('root'));
@@ -44,7 +56,7 @@ export function ActivityGenerator(){
 
     function getImage(queryString) {
         const unsplash = createApi({
-            accessKey: 'TXmsxWk4HiObYTj_WKQ-2jnB3wRe28pqV2MWrMDrdeY'
+            accessKey: process.env.IMAGE_ACCESS_KEY,
         })
         var response = unsplash.search.getPhotos({
             query: queryString
@@ -79,7 +91,6 @@ export function ActivityGenerator(){
 
         //const calendar = google.calendar({version: 'v3', auth});
         
-
         // Refer to the Node.js quickstart on how to setup the environment:
         // https://developers.google.com/calendar/quickstart/node
         // Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
@@ -93,7 +104,6 @@ export function ActivityGenerator(){
         var end = new Date(start.getTime() + MILLIS_PER_HOUR);
 
         /*
-
         var event = {
             'summary': randActivity,
             'start': {
@@ -127,13 +137,25 @@ export function ActivityGenerator(){
     }
 
     return(
+        /*<div>
+        <div>
+        <ul>
+            <li>
+            <Link to="/"> <p2>Home</p2></Link>
+            </li>
+            <li>
+            <Link to="/activity"> <p2>Random activity generator</p2></Link>
+            </li>
+        </ul>
+        </div>*/
         <div class="wrapper">
             <h1> Random activity generator</h1>
             <button class="button" onClick={showWheel}>Pick me an activity</button>
             <p>{randActivity}</p>
+            <button class="button" onClick={addEvent}>Add to my calendar</button>
             <img src={"imgUrl"} alt = "loading..." />        
         
-
         </div>
+        //</div>
     );
 }
